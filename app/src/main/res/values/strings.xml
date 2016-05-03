@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Delask</string>
+    <string name="callback_200">Zapytanie zostało dodane do bazy danych!</string>
+    <string name="hint_ask_question">Twoje pytanie</string>
+    <string name="question_mark">\?</string>
+    <string name="btn_send_question">dodaj pytanie</string>
+    <string name="input_error">Prosze wpisac poprawne dane</string>
 </resources>
