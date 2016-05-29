@@ -9,6 +9,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 /**
@@ -20,16 +21,21 @@ public interface Endpoints {
     @POST("/questions")
     Call<Question> createQuestion(@Body Question question);
 
-
     //Zwraca wszystkie zapytania
     @GET("/questions")
     Call<List<Question>> getAllQuestions();
 
     //zwaraca tylko zapytania usera
-    @GET("/questions/user/{user_id}")
-    Call<List<Question>> getQuestionOfUser(@Path("user_id") UUID userId);
+    @GET("/question/user/{user_id}")
+    Call<List<Question>> getQuestionOfUser(@Path("user_id") String userId);
 
     //usuwa zapytanie
     @DELETE("/question/{question_id}")
-    Call<Void> removeQuestion(@Path("question_id") UUID questionId);
+    Call<Void> removeQuestion(@Path("question_id") String questionId);
+
+    @PUT("/question/{question_id}/yes")
+    Call<Void> incrementPositive(@Path("question_id")String questionId);
+
+    @PUT("/question/{question_id}/no")
+    Call<Void> incrementNegative(@Path("question_id")String questionId);
 }

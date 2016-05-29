@@ -1,5 +1,6 @@
 package pl.boleck.delask;
 
+import android.app.ProgressDialog;
 import android.provider.Settings;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.boleck.delask.comunication.Endpoints;
+import pl.boleck.delask.helper.Utils;
 import pl.boleck.delask.model.Question;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +28,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     TextInputEditText textInputEditText;
 
     DelaskApp mApp;
+    private ProgressDialog pr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,13 @@ public class AddQuestionActivity extends AppCompatActivity {
     @OnClick(R.id.btn_add_question)
     public void addQuestion(View view){
         if(!TextUtils.isEmpty(textInputEditText.getText()) && textInputEditText.length()>5 && textInputEditText.length()<180) {
+            //Utils.showLoading(getApplicationContext(),"Adding question","Please wait...",false);
+            pr = new ProgressDialog(AddQuestionActivity.this);
+            pr.setMessage("Please wait...");
+            pr.setCancelable(false);
+            pr.setTitle("Adding Question");
+            pr.setIndeterminate(true);
+            pr.show();
             String deviceid = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
             Question testQuestion = new Question(textInputEditText.getText().toString(),deviceid);
             Endpoints service = mApp.getRetrofit().create(Endpoints.class);
@@ -54,6 +64,7 @@ public class AddQuestionActivity extends AppCompatActivity {
                                 question = response.body();
                                 if (question != null) {
                                     //progressBar.setVisibility(View.GONE);
+                                    pr.dismiss();
                                     Snackbar.make(coordinatorLayout, R.string.callback_200, Snackbar.LENGTH_SHORT);
                                     finish();
                                 }

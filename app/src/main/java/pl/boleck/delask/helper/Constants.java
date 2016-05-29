@@ -6,6 +6,6 @@ package pl.boleck.delask.helper;
 public class Constants {
     public static final class HTTP {
 
-        public static final String BASE_URL = "http://192.168.0.17:7000";
+        public static final String BASE_URL = "http://192.168.0.14:7000";
     }
 }

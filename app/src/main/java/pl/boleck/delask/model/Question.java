@@ -8,6 +8,7 @@ import java.util.UUID;
  * Created by Boleck on 2016-04-22.
  */
 public class Question {
+    public String _id;
     public String text;
     public String device;
     public int negative;
@@ -27,6 +28,14 @@ public class Question {
   "positive": <int>,
   "negative": <int>
      */
+
+    public void setId(String id) {
+        this._id = id;
+    }
+
+    public String getId() {
+        return _id;
+    }
 
     public String getText() {
         return text;
